@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>ProjectManager</title>
-    <link rel="stylesheet" href="app.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="dist/app.js" defer></script>
   </head>
   <body>
     <template id="project-input">
       <form>
-        <div class="form-control">
-          <label for="title">Title</label>
-          <input type="text" id="title" />
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" class="form-control"/>
         </div>
-        <div class="form-control">
-          <label for="description">Description</label>
-          <textarea id="description" rows="3"></textarea>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" rows="3" class="form-control"></textarea>
         </div>
-        <div class="form-control">
-          <label for="people">People</label>
-          <input type="number" id="people" step="1" min="0" max="10" />
+        <div class="mb-3">
+          <label for="people" class="form-label">People</label>
+          <input type="number" id="people" step="1" min="0" max="10" class="form-control"/>
         </div>
-        <button type="submit">ADD PROJECT</button>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">ADD PROJECT</button>
+        </div>
+        
       </form>
     </template>
     <template id="single-project">
@@ -37,6 +41,6 @@
         <ul></ul>
       </section>
     </template>
-    <div id="app"></div>
+    <div id="app" class="container mt-3"></div>
   </body>
 </html>
