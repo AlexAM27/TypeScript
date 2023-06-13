@@ -1,3 +1,34 @@
+interface Validatable {
+  value: string | number;
+  required: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
+
+function validate(validatable: Validatable) {
+  let isValid = true;
+
+  if(validatable.required) {
+    isValid = isValid && validatable.value.toString().trim().length !== 0;
+  }
+  if (validatable.minLength != null && typeof validatable.value === 'string') {
+    isValid = isValid && validatable.value.length >= validatable.minLength;
+  }
+  if (validatable.maxLength != null && typeof validatable.value === 'string') {
+    isValid = isValid && validatable.value.length <= validatable.maxLength;
+  }
+  if (validatable.min != null) {
+    isValid = isValid && +validatable.value >= validatable.min;
+  }
+  if (validatable.max != null) {
+    isValid = isValid && +validatable.value <= validatable.max;
+  }
+  return isValid;
+}
+
+
 function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
   const adjDescriptor: PropertyDescriptor = {
@@ -56,7 +87,27 @@ class ProjectInput {
     const title = this.titleInputElement.value;
     const description = this.descriptionInputElement.value;
     const peopleAmount = this.peopleInputElement.value;
-    if (title.length === 0 || description.length === 0 || peopleAmount.length === 0) {
+
+    const titleValidatable: Validatable = {
+      value: title,
+      required: true
+    }; 
+
+    const descriptionValidatable: Validatable = {
+      value: description,
+      required: true,
+      minLength: 5,
+      maxLength: 10
+    }; 
+
+    const peopleValidatable: Validatable = {
+      value: peopleAmount,
+      required: true,
+      min: 1,
+      max: 5
+    }; 
+
+    if (!validate(titleValidatable) || !validate(descriptionValidatable) || !validate(peopleValidatable)) {
       alert('Wrong input!');
       return;
     } else {
